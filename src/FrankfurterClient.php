@@ -24,9 +24,11 @@ class FrankfurterClient
 
     public function setSymbols(string|array $symbols): FrankfurterClient
     {
+        $symbols = Arr::wrap($symbols);
+
         $options = $this->client->getOptions();
 
-        Arr::set($options, 'query.symbols', Arr::wrap($symbols));
+        Arr::set($options, 'query.symbols', implode(',', $symbols));
 
         $this->client->withOptions($options);
 
