@@ -1,0 +1,21 @@
+{
+    "name": "investbrainapp/frankfurter-client",
+    "description": "Laravel SDK for interacting with the Frankfurter currency exchange API",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Investbrain\\Frankfurter\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Investbrain\\Frankfurter\\FrankfurterServiceProvider"
+            ]
+        }
+    }
+}
