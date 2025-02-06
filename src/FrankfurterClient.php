@@ -18,16 +18,30 @@ class FrankfurterClient
     {
         $this->baseUrl = config('frankfurter.base_url');
         $this->client = Http::baseUrl($this->baseUrl);
+
+        $this->setBaseCurrency(config('frankfurter.base_currency'));
     }
 
-    public function setSymbols(string|array $symbols): void
+    public function setSymbols(string|array $symbols): FrankfurterClient
     {
-        $this->client->withQueryParameters(['symbols' => Arr::wrap($symbols)]);
+        $options = $this->client->getOptions();
+
+        Arr::set($options, 'query.symbols', Arr::wrap($symbols));
+
+        $this->client->withOptions($options);
+
+        return $this;
     }
 
-    public function setBaseCurrency(string $currency): void
+    public function setBaseCurrency(string $currency): FrankfurterClient
     {
-        $this->client->withQueryParameters(['base' => $currency]);
+        $options = $this->client->getOptions();
+
+        Arr::set($options, 'query.base', $currency);
+
+        $this->client->withOptions($options);
+
+        return $this;
     }
 
     public function latest(): array
