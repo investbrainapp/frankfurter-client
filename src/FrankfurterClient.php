@@ -53,11 +53,13 @@ class FrankfurterClient
 
     public function historical(string|\DateTime $date): array
     {
+
         return $this->client->get(Carbon::parse($date)->format('Y-m-d'))->json();
     }
 
     public function timeSeries(string|\DateTime $start, mixed $end = null): array
     {
+
         $end = is_null($end) ? null : Carbon::parse($end)->format('Y-m-d');
 
         return $this->client->get(Carbon::parse($start)->format('Y-m-d').'..'.$end)->json();
